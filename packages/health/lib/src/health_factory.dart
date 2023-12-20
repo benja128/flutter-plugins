@@ -530,7 +530,21 @@ class HealthFactory {
       if (dataType == HealthDataType.AUDIOGRAM) {
         value = AudiogramHealthValue.fromJson(e);
       } else if (dataType == HealthDataType.WORKOUT) {
-        value = WorkoutHealthValue.fromJson(e);
+        // Fix for:
+        // https://beefit.sentry.io/issues/4199258046/?project=4504123876179968&query=is%3Aunresolved+user.id%3A656f2edf98734d00a3eb05df&referrer=issue-stream&statsPeriod=14d&stream_index=1
+        // https://github.com/cph-cachet/flutter-plugins/issues/848
+        
+       if (_platformType == PlatformType.ANDROID &&
+        _isOnAndroid(activityType) || 
+ _platformType == PlatformType.IOS && _isOnIOS(activityType)
+          
+          ){
+                value = WorkoutHealthValue.fromJson(e);
+        }
+
+
+        
+ 
       } else if (dataType == HealthDataType.ELECTROCARDIOGRAM) {
         value = ElectrocardiogramHealthValue.fromJson(e);
       } else if (dataType == HealthDataType.NUTRITION) {
