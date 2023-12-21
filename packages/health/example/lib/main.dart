@@ -35,19 +35,17 @@ class _HealthAppState extends State<HealthApp> {
   // NOTE: These are only the ones supported on Androids new API Health Connect.
   // Both Android's Google Fit and iOS' HealthKit have more types that we support in the enum list [HealthDataType]
   // Add more - like AUDIOGRAM, HEADACHE_SEVERE etc. to try them.
-  static final types = dataTypesAndroid;
+  // static final types = dataTypesAndroid;
   // Or selected types
-  // static final types = [
-  //   HealthDataType.WEIGHT,
-  //   HealthDataType.STEPS,
-  //   HealthDataType.HEIGHT,
-  //   HealthDataType.BLOOD_GLUCOSE,
-  //   HealthDataType.WORKOUT,
-  //   HealthDataType.BLOOD_PRESSURE_DIASTOLIC,
-  //   HealthDataType.BLOOD_PRESSURE_SYSTOLIC,
-  //   // Uncomment these lines on iOS - only available on iOS
-  //   // HealthDataType.AUDIOGRAM
-  // ];
+  static final types = [
+    HealthDataType.WEIGHT,
+    HealthDataType.STEPS,
+    HealthDataType.HEIGHT,
+    HealthDataType.WORKOUT,
+
+    // Uncomment these lines on iOS - only available on iOS
+    // HealthDataType.AUDIOGRAM
+  ];
 
   // with corresponsing permissions
   // READ only
@@ -154,7 +152,13 @@ class _HealthAppState extends State<HealthApp> {
     success &=
         await health.writeHealthData(1.8, HealthDataType.WATER, earlier, now);
     success &= await health.writeWorkoutData(
-        HealthWorkoutActivityType.AMERICAN_FOOTBALL,
+        HealthWorkoutActivityType.SWIMBIKERUN,
+        now.subtract(Duration(minutes: 15)),
+        now,
+        totalDistance: 2430,
+        totalEnergyBurned: 400);
+    success &= await health.writeWorkoutData(
+        HealthWorkoutActivityType.TRANSITION,
         now.subtract(Duration(minutes: 15)),
         now,
         totalDistance: 2430,

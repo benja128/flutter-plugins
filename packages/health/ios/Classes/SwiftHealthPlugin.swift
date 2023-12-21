@@ -991,6 +991,7 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
         workoutActivityTypeMap["TAI_CHI"] = .taiChi
         workoutActivityTypeMap["WRESTLING"] = .wrestling
         workoutActivityTypeMap["OTHER"] = .other
+
         
         // Set up iOS 13 specific types (ordinary health data types)
         if #available(iOS 13.0, *) {
@@ -1053,6 +1054,7 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
             dataTypesDict[NUTRITION] = HKSampleType.correlationType(
                 forIdentifier: .food)!
             
+
             healthDataTypes = Array(dataTypesDict.values)
         }
         // Set up heart rate data types specific to the apple watch, requires iOS 12
@@ -1093,6 +1095,11 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
             workoutActivityTypeMap["SOCIAL_DANCE"] = HKWorkoutActivityType.socialDance
             workoutActivityTypeMap["PICKLEBALL"] = HKWorkoutActivityType.pickleball
             workoutActivityTypeMap["COOLDOWN"] = HKWorkoutActivityType.cooldown
+        }
+
+        if #available(iOS 16.0, *) {
+            workoutActivityTypeMap["SWIMBIKERUN"] = .swimBikeRun
+            workoutActivityTypeMap["TRANSITION"] = .transition
         }
         
         // Concatenate heart events, headache and health data types (both may be empty)

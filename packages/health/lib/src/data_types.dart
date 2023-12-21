@@ -342,6 +342,8 @@ enum HealthWorkoutActivityType {
   WALKING,
   WATER_POLO,
   YOGA,
+  SWIMBIKERUN,
+  TRANSITION,
 
   // iOS only
   BOWLING,
